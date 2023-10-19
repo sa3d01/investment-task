@@ -5,6 +5,7 @@ networks:
 
 services:
   app:
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
@@ -17,6 +18,8 @@ services:
       - JAVA_OPTS=-Xmx512m
       - DB_USERNAME=${DB_USERNAME}
       - DB_PASSWORD=${DB_PASSWORD}
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${DB_NAME}
     networks:
       - finflx_network
     depends_on:
@@ -25,8 +28,10 @@ services:
   db:
     image: mysql:8.0
     environment:
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
