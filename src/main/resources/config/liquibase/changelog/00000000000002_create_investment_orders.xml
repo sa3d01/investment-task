@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="investment_orders" author="sa3d01">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="investment_orders"/>
+            </not>
+        </preConditions>
+        <createTable tableName="investment_orders">
+            <column name="order_id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_type" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_amount" type="decimal(19, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="order_status" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

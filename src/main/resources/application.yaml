@@ -1,0 +1,42 @@
+spring:
+  # Database Configuration
+  datasource:
+    url: jdbc:mysql://${DB_HOST}:3306/${DB_NAME}?createDatabaseIfNotExist=true
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # Hibernate Configuration
+  jpa:
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+  # Liquibase Configuration
+  liquibase:
+    change-log: classpath:config/liquibase/master.xml
+
+# Seeder
+app:
+  dataseeder:
+    enabled: true
+
+jwt:
+  secret: your-secret-key
+  expiration: 86400 # Token expiration in seconds (24 hours)
+
+# Server Configuration
+server:
+  port: 8090
+
+# Swagger Configuration
+springdoc:
+  show-actuator: false  # Show Actuator endpoints in Swagger UI
+  swagger-ui:
+    enabled: true  # Enable Swagger UI
+  api-docs:
+    enabled: true  # Enable API documentation generation
+  path: /swagger-ui.html
